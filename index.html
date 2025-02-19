@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shadab Sahil Online Store</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+<body>
+    <div class="page-wrapper">
+        <header id="top">
+            <div class="logo">
+                <h1>Shadab Sahil Online Store</h1>
+                <p class="tagline">Your Premium Phone Destination</p>
+            </div>
+            <nav>
+                <div class="nav-items">
+                    <a href="#hero" class="nav-link active">Home</a>
+                    <a href="#products" class="nav-link">Products</a>
+                    <a href="#footer" class="nav-link">About</a>
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="Search phones...">
+                        <button id="search-btn">🔍</button>
+                    </div>
+                    <div class="cart-icon" onclick="toggleCart()">
+                        🛒 <span id="cart-count">0</span>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <section id="hero">
+                <h2>Welcome to Our Store</h2>
+                <p>Discover the Latest Smartphones at Great Prices</p>
+            </section>
+
+            <section id="products" class="products-grid">
+                <!-- Products will be dynamically loaded here -->
+            </section>
+
+            <div id="cart-sidebar" class="cart-sidebar">
+                <div class="cart-header">
+                    <h2>Shopping Cart</h2>
+                    <button class="close-cart">×</button>
+                </div>
+                <div id="cart-items"></div>
+                <div class="cart-total">
+                    <h3>Total: $<span id="cart-total">0</span></h3>
+                    <button onclick="checkout()" class="checkout-btn">Checkout</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Order Form Modal -->
+        <div id="order-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-modal" onclick="closeOrderModal()">&times;</span>
+                <h2>Complete Your Order</h2>
+                <form id="order-form">
+                    <input type="text" id="name" placeholder="Your Name" required>
+                    <input type="email" id="email" placeholder="Your Email" required>
+                    <input type="tel" id="phone" placeholder="Phone Number" required>
+                    <textarea id="address" placeholder="Delivery Address" required></textarea>
+                    
+                    <div class="payment-options">
+                        <h3>Select Payment Method</h3>
+                        <div class="payment-methods">
+                            <label class="payment-method">
+                                <input type="radio" name="payment" value="cod" required>
+                                <span class="method-icon">💵</span>
+                                <span class="method-name">Cash on Delivery</span>
+                            </label>
+                            <label class="payment-method">
+                                <input type="radio" name="payment" value="googlepay" required>
+                                <span class="method-icon">📱</span>
+                                <span class="method-name">Google Pay</span>
+                            </label>
+                            <label class="payment-method">
+                                <input type="radio" name="payment" value="paytm" required>
+                                <span class="method-icon">💳</span>
+                                <span class="method-name">Paytm</span>
+                            </label>
+                        </div>
+                        <div id="upi-details" style="display: none;">
+                            <div id="googlepay-details" class="payment-details">
+                                <p class="payment-info">Google Pay Number: <span class="highlight">+918860856316</span></p>
+                                <p class="payment-steps">Steps to pay:</p>
+                                <ol>
+                                    <li>Open Google Pay app</li>
+                                    <li>Click on 'Pay' or 'New Payment'</li>
+                                    <li>Enter the number: 8860856316</li>
+                                    <li>Enter amount: ₹<span id="amount-to-pay">0</span></li>
+                                    <li>Add order ID in description</li>
+                                    <li>Complete the payment</li>
+                                </ol>
+                            </div>
+                            <div id="paytm-details" class="payment-details">
+                                <p class="payment-info">Paytm Number: <span class="highlight">+918860856316</span></p>
+                                <p class="payment-steps">Steps to pay:</p>
+                                <ol>
+                                    <li>Open Paytm app</li>
+                                    <li>Click on 'Pay' or 'Send Money'</li>
+                                    <li>Enter the number: 8860856316</li>
+                                    <li>Enter amount: ₹<span id="paytm-amount">0</span></li>
+                                    <li>Add order ID in description</li>
+                                    <li>Complete the payment</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="submit-btn">Place Order</button>
+                </form>
+            </div>
+        </div>
+
+        <footer id="footer">
+            <div class="footer-content">
+                <div class="footer-section brand">
+                    <h3>Shadab Sahil Online Store</h3>
+                    <p class="tagline">Your trusted destination for premium smartphones</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fas fa-facebook"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fas fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section contact">
+                    <h4>Contact Us</h4>
+                    <div class="contact-info">
+                        <a href="tel:+918860856316"><p><i class="fas fa-phone"></i> +91 8860856316</p></a>
+                        <a href="mailto:shadabsahillkhan1@gmail.com"><p><i class="fas fa-envelope"></i> shadabsahillkhan1@gmail.com</p></a>
+                        <p><i class="fas fa-map-marker-alt"></i> New Delhi, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Shadab Sahil Online Store. All rights reserved.</p>
+                <p class="payment-methods">
+                    <i class="fab fa-cc-visa"></i>
+                    <i class="fab fa-cc-mastercard"></i>
+                    <i class="fab fa-google-pay"></i>
+                    <i class="fab fa-cc-paypal"></i>
+                </p>
+            </div>
+        </footer>
+        <button id="scroll-to-top" title="Scroll to Top">↑</button>
+    </div>
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
